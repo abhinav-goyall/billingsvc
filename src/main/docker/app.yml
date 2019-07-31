@@ -1,0 +1,14 @@
+version: '2'
+services:
+    billingsvc-app:
+        image: billingsvc
+        environment:
+            - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_COUCHBASE_BOOTSTRAP_HOSTS=billingsvc-couchbase
+            - SPRING_COUCHBASE_BUCKET_NAME=billingsvc
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+    billingsvc-couchbase:
+        extends:
+            file: couchbase.yml
+            service: billingsvc-couchbase
